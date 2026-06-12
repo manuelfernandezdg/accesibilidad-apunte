@@ -451,6 +451,7 @@ button {
 }
 
 .note {
+  color: var(--accent-color-400);
   padding: 2rem 2.5rem;
   border-radius: 1rem;
   border-left: 4px solid var(--accent-color-400);
