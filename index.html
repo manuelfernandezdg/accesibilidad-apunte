@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script>
+  try {
+    const saved = localStorage.getItem('theme');
+    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', saved ?? preferred);
+  } catch {}
+  </script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+	<title>Accesibilidad WAI | Bienvenidos</title>
+  <meta name="description" content="Bienvenidos al curso sobre Accesibilidad y la WAI.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="stylesheet" href="css/estilos.css">
+  <script src="js/menu.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">Accesibilidad</a></h1>
+    <div class="contenedor-menu">
+      <nav class="toggle-wrap">
+        <div class="toggle-label" id="mode-label">Modo oscuro</div>
+        <button class="toggle-btn" id="theme-toggle" aria-label="Cambiar tema"><span class="sr-only">Cambiar tema</span></button>
+      </nav>
+      <button class="menu-boton" aria-label="Ingresar al menu principal" aria-controls="primary-navigation" aria-expanded="false"><span class="sr-only">Menu principal</span></button>
+    </div>
+    <nav id="primary-navigation" data-visible="false" class="primary-navigation">
+      <ul id="nav-links"></ul>
+    </nav>
+  </header>
+  <main class="contenido">
+    <section>
+      <h1>Bienvenidos al curso de Accesibilidad</h1>
+    </section>
+    <section>
+      <h1>Fundamentos de Accesibilidad</h1>
+      <h2>¿Qué es la accesibilidad web?</h2>
+      <p>La accesibilidad web consiste en diseñar y desarrollar sitios y aplicaciones web de manera que puedan ser utilizados por todas las personas, independientemente de sus capacidades físicas, sensoriales, cognitivas o tecnológicas. En accesibilidad es importante contemplar siempre el <strong>perfil de usuario</strong> y el <strong>contexto de uso</strong>.</p>
+      <p>Incluye a personas con:</p>
+      <ul>
+        <li>Discapacidades visuales (ciegas, baja visión), auditivas y/o cognitivas.</li>
+        <li>Usuarios con conexiones a internet lentas.</li>
+        <li>Acceso desde diferentes dispositivos.</li>
+        <li>Acceso desde diferentes versiones de sistemas operativos.</li>
+      </ul>
+      <aside class="note">
+        <p>“La accesibilidad beneficia a todos” — es una mejora de la experiencia de usuario general.</p>
+      </aside>
+    </section>
+    <section>
+      <h1>La Iniciativa de Accesibilidad Web (WAI)</h1>
+      <p>La <strong><acronym lang="en" title="Web Accessibility Initiative">WAI</acronym></strong> (Web Accessibility Initiative) es un grupo de trabajo dentro de la <strong>W3C</strong> que desarrolla estándares internacionales para la accesibilidad web. Fue creada en 1997 y desde entonces publica y mantiene las pautas que usamos como referencia.</p>
+      <p>Los recursos principales que produce la <strong><acronym title="Web Accessibility Initiative">WAI</acronym></strong> son:</p>
+      <ul>
+        <li><strong><acronym lang="en" title="Web Content Accessibility Guidelines">WCAG</acronym></strong> — Pautas para el contenido web (sitios, aplicaciones).</li>
+        <li><strong><acronym lang="en" title="">ATAG</acronym></strong> — Pautas para las herramientas de autoría (CMS, editores).</li>
+        <li><strong><acronym lang="en" title="">UAAG</acronym></strong> — Pautas para navegadores y reproductores multimedia.</li>
+        <li><strong><acronym lang="en" title="">ARIA</acronym></strong> — Especificación técnica para mejorar la accesibilidad de aplicaciones web dinámicas.</li>
+      </ul>
+      <h2>¿Qué son las <strong><acronym lang="en" title="Web Content Accessibility Guidelines">WCAG</acronym></strong>, Pautas para el contenido accesible en la Web</h2>
+      <p>Las <strong><acronym lang="en" title="Web Content Accessibility Guidelines">WCAG</acronym></strong> son el estándar internacional para la accesibilidad del contenido web. La versión actual es la <strong>WCAG 2.2</strong> publicada en octubre de 2023 y es compatible con las versiones 2.0 y 2.1.</p>
+      <p>Las <strong><acronym lang="en" title="Web Content Accessibility Guidelines">WCAG</acronym></strong> están organiza en 4 principios, 13 pautas y 86 criterios de conformidad (en 2.2). Cada criterio tiene asignado un nivel de conformidad:</p>
+      <ul>
+        <li><span class="note--tip-A">Nivel A</span> — Obligatorio</li>
+        <li><span class="note--tip-AA">Nivel AA</span> — Recomendado</li>
+        <li><span class="note--tip-AAA">Nivel AAA</span> — Experiencia óptima</li>
+      </ul>
+      <p>En la práctica, el nivel <strong>AA</strong> es el exigido por la mayoría de las legislaciones del mundo, incluída la argentina.</p>
+    </section>
+    <section>
+      <h1>Legislación en Argentina y el mundo</h1>
+      <h2>Argentina</h2>
+      <p>La <strong>Ley 26.653</strong> (sancionada en 2010) establece que todos los sitios web del Estado Nacional deben ser accesibles. Está reglamentada por el decreto y la Disposición 2/2014 de la ONTI, que adopta <strong>WCAG 2.0 nivel AA como estándar</strong>. Además, la <strong>Ley 26.522</strong> de Servicios de Comunicación Audiovisual también incluye disposiciones sobre accesibilidad.</p>
+      <h2>En el mundo</h2>
+      <p>Hacer accesible un sitio web trae beneficios que van mucho más allá del cumplimiento legal:</p>
+      <ul>
+        <li><strong>Alcance</strong>: nos permite alcanzar a más del <strong>15% de la población mundial</strong> que tiene alguna discapacidad.</li>
+        <li><strong>SEO</strong>: muchas prácticas de accesibilidad (alternativas textuales, estructura semántica) mejoran el posicionamiento.</li>
+        <li><strong>Usabilidad</strong>: los sitios accesibles son más fáciles de usar para todas las personas.</li>
+        <li><strong>Rendimiento</strong>: el código semántico y bien estructurado suele ser más liviano y rápido.</li>
+        <li><strong>Mantenimiento</strong>: el código organizado y con buenas prácticas es más fácil de mantener.</li>
+        <li><strong>Innovación</strong>: la accesibilidad impulsa soluciones creativas que benefician a todos.</li>
+      </ul>
+    </section>
+
+  </main>
+  <footer>
+    <div class="contenedor-footer">
+      <span>Accesibilidad | WAI | WCAG | Educación IT | 2026</span>
+    </div>
+  </footer>
+</body>
+</html>

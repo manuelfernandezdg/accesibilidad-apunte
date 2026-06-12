@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script>
+  try {
+    const saved = localStorage.getItem('theme');
+    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', saved ?? preferred);
+  } catch {}
+  </script>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+	<title>Accesibilidad | Clase 1</title>
+  <meta name="description" content="Clase 1 de principios de Accesibilidad y la WAI.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="stylesheet" href="css/estilos.css">
+  <script src="js/menu.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">Accesibilidad</a></h1>
+    <div class="contenedor-menu">
+      <nav class="toggle-wrap">
+        <div class="toggle-label" id="mode-label">Modo oscuro</div>
+        <button class="toggle-btn" id="theme-toggle" aria-label="Cambiar tema"><span class="sr-only">Cambiar tema</span></button>
+      </nav>
+      <button class="menu-boton" aria-label="Ingresar al menu principal" aria-controls="primary-navigation" aria-expanded="false"><span class="sr-only">Menu principal</span></button>
+    </div>
+    <nav id="primary-navigation" data-visible="false" class="primary-navigation">
+      <ul id="nav-links"></ul>
+    </nav>
+  </header>
+  <main class="contenido">
+    <section>
+      <h1>Accesibilidad | Clase 1: <acronym lang="en" title="Web Content Accessibility Guidelines">WCAG</acronym></h1>
+    </section>
+    <section>
+      <h1>Temario</h1>
+      <div class="contenedor-cards">
+         <article class="card" aria-labelledby="mod1-title">
+            <div class="card__header">
+              <span class="card__number" aria-hidden="true">1</span>
+              <h3 id="mod1-title" class="card__title">Fundamentos de Accesibilidad Web</h3>
+            </div>
+            <div class="card__body">
+              <p>Qué es la accesibilidad web, la WAI, las WCAG, la legislación vigente y los beneficios de diseñar para todos.</p>
+            </div>
+            <ul class="card__topics" aria-label="Temas del módulo">
+              <li class="card__topic">WAI</li>
+              <li class="card__topic">WCAG</li>
+              <li class="card__topic">Legislación</li>
+            </ul>
+          </article>
+
+          <article class="card" aria-labelledby="mod2-title">
+            <div class="card__header">
+              <span class="card__number" aria-hidden="true">2</span>
+              <h3 id="mod2-title" class="card__title">Principios WCAG (POUR)</h3>
+            </div>
+            <div class="card__body">
+              <p>Los cuatro principios: Perceptible, Operable, Comprensible y Robusto. Niveles de conformidad A, AA y AAA.</p>
+            </div>
+            <ul class="card__topics" aria-label="Temas del módulo">
+              <li class="card__topic">Perceptible</li>
+              <li class="card__topic">Operable</li>
+              <li class="card__topic">Comprensible</li>
+              <li class="card__topic">Robusto</li>
+            </ul>
+          </article>
+
+          <article class="card" aria-labelledby="mod3-title">
+            <div class="card__header">
+              <span class="card__number" aria-hidden="true">3</span>
+              <h3 id="mod3-title" class="card__title">Técnicas y Buenas Prácticas</h3>
+            </div>
+            <div class="card__body">
+              <p>HTML semántico, WAI-ARIA, navegación por teclado, contraste de color, textos alternativos y formularios accesibles.</p>
+            </div>
+            <ul class="card__topics" aria-label="Temas del módulo">
+              <li class="card__topic">HTML semántico</li>
+              <li class="card__topic">ARIA</li>
+              <li class="card__topic">Contraste</li>
+              <li class="card__topic">Formularios</li>
+            </ul>
+          </article>
+
+          <article class="card" aria-labelledby="mod4-title">
+            <div class="card__header">
+              <span class="card__number" aria-hidden="true">4</span>
+              <h3 id="mod4-title" class="card__title">Evaluación y Mantenimiento</h3>
+            </div>
+            <div class="card__body">
+              <p>Herramientas de testing automático y manual, checklist de auditoría e integración de accesibilidad en el flujo de trabajo.</p>
+            </div>
+            <ul class="card__topics" aria-label="Temas del módulo">
+              <li class="card__topic">Testing automático</li>
+              <li class="card__topic">Lectores de pantalla</li>
+              <li class="card__topic">Auditoría</li>
+            </ul>
+          </article>
+      </div>
+    </section>
+    <section>
+      <h1>Perceptible</h1>
+      <p>La información y los componentes de la interfaz deben poder presentarse a los usuarios de modo que ellos puedan percibirlos. Este principio abarca todo lo relacionado con cómo se presenta la información para que cualquier persona pueda percibirla, sin importar sus capacidades sensoriales.</p>
+      <p>Pautas incluídas:</p>
+      <ul>
+        <li><span>1.1 Alternativas textuales</span>: todo contenido no textual debe tener una alternativa textual equivalente (ej. alt en imágenes, transcripciones en audio).</li>
+        <li><span>1.2 Contenido multimedia dependiente del tiempo</span>: subtítulos, audiodescripciones, transcripciones para video y audio.</li>
+        <li><span>1.3 Adaptabilidad</span>: el contenido debe poder presentarse de diferentes formas sin perder información (lectura en línea, ampliación, braille).</li>
+        <li><span>1.4 Distinguible</span>: facilitar la visión y audición del contenido (contraste, redimensionamiento de texto, evitar texto como imagen).</li>
+      </ul>
+      <p>Por ejemplo: Una imagen sin alt no es perceptible para alguien que usa un lector de pantallas. Un video sin subtítulos no es perceptible para alguien con discapacidad auditiva. Un texto con contraste 2:1 no es perceptible para alguien con baja visión.</p>
+      
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-comment">&lt;!-- Esta imagen aparece en pantalla, pero sin una alternativa textual --&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content"><span class="token-tag">&lt;img</span> <span class="token-attr">src</span><span class="token-string">="img/001.jpg"</span> <span class="token-attr">alt</span><span class="token-string">=""</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content">      </span></div><div class="line"><span class="line-num">4</span><span class="line-content"><span class="token-comment">&lt;!-- Ahora, su atributo alt no está vacío, pero su contenido es incorrecto porque no describe el contenido de la imagen --&gt;</span></span></div><div class="line"><span class="line-num">5</span><span class="line-content"><span class="token-tag">&lt;img</span> <span class="token-attr">src</span><span class="token-string">="img/001.jpg"</span> <span class="token-attr">alt</span><span class="token-string">="Foto 1"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">6</span><span class="line-content">      </span></div><div class="line"><span class="line-num">7</span><span class="line-content"><span class="token-comment">&lt;!-- Ahora el atributo alt está correctamente completo y describe la imagen, además de agregar palabras clave que funcionarán para SEO --&gt;</span></span></div><div class="line"><span class="line-num">8</span><span class="line-content"><span class="token-tag">&lt;img</span> <span class="token-attr">src</span><span class="token-string">="img/001.jpg"</span> <span class="token-attr">alt</span><span class="token-string">="Portada del libro The Shadow #1"</span><span class="token-tag">&gt;</span></span></div></code></pre>
+
+    </section>
+    
+  </main>
+  <footer>
+    <div class="contenedor-footer">
+      <span>Aplicaciones Web Cliente | ISTEA | 2026</span>
+    </div>
+  </footer>
+</body>
+</html>
