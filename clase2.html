@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script>
+  try {
+    const saved = localStorage.getItem('theme');
+    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', saved ?? preferred);
+  } catch {}
+  </script>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+	<title>Accesibilidad | Clase 2</title>
+  <meta name="description" content="Clase 2: .">
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="stylesheet" href="css/estilos.css">
+  <script src="js/menu.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">Accesibilidad</a></h1>
+    <div class="contenedor-menu">
+      <nav class="toggle-wrap">
+        <div class="toggle-label" id="mode-label">Modo oscuro</div>
+        <button class="toggle-btn" id="theme-toggle" aria-label="Cambiar tema"><span class="sr-only">Cambiar tema</span></button>
+      </nav>
+      <button class="menu-boton" aria-label="Ingresar al menu principal" aria-controls="primary-navigation" aria-expanded="false"><span class="sr-only">Menu principal</span></button>
+    </div>
+    <nav id="primary-navigation" data-visible="false" class="primary-navigation">
+      <ul id="nav-links"></ul>
+    </nav>
+  </header>
+  <main class="contenido">
+    <section>
+      <h1>Accesibilidad | Clase 2: Perceptible</h1>
+    </section>
+    <section>
+      <h1></h1>
+      
+    </section>
+    <section>
+      <h1>Imágenes a través de CSS</h1>
+      <p>Una práctica recomendada en <strong>accesibilidad</strong> es que si la imagen que utilizamos para la interfaz es "decorativa" o no agrega información adicional al contenido principal, la misma debe ser llamada desde CSS. Esto evita tener que agregar información adicional a través del atributo <strong>alt</strong> dentro de <strong>HTML</strong></p>
+      <p>Si trabajamos con íconos en botones/links.</p>
+      <p>Este ejemplo está "bien" en principio, manejamos el propósito del link con el atributo <span>aria-label</span> y no es necesario agregar texto adicional dentro del botón.</p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-tag">&lt;button</span> <span class="token-attr">class</span><span class="token-string">="btn-fav"</span> <span class="token-attr">aria-label</span><span class="token-string">="Agregar a favoritos"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content">  <span class="token-comment">&lt;!-- background-image: url(icon-fav.svg); en CSS --&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content"><span class="token-tag">&lt;/button&gt;</span></span></div></code></pre>
+      
+      <p>En este segundo ejemplo tenemos una solución mucho más robusta. Si los usuarios utilizan un traductor automático, el valor del <span>aria-label</span> se pierde y no es traducido. En cambio, el texto dentro del <span>.sr-only</span> es parte del contenido del DOM, es traducible, seleccionable y visible si falla el CSS.</p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-tag">&lt;button</span> <span class="token-attr">class</span><span class="token-string">="btn-fav"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content">  <span class="token-tag">&lt;span</span> <span class="token-attr">class</span><span class="token-string">="sr-only"</span><span class="token-tag">&gt;</span>Agregar a favoritos<span class="token-tag">&lt;/span&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content">  <span class="token-comment">&lt;!-- el ícono puede ir como background del button o como SVG inline --&gt;</span></span></div><div class="line"><span class="line-num">4</span><span class="line-content"><span class="token-tag">&lt;/button&gt;</span></span></div></code></pre>
+
+      <p>Otra forma puede ser utilizar la imagen de icono dentro del botón o link, junto con la etiqueta de descripción del propósito de la acción. En este caso como la etiqueta es visible no es necesario utilizar <span>sr-only</span> para ocultar el texto. Utilizamos <span>aria-hidden = "true"</span> en la imagen para que el lector de pantalla ignore el elemento y no sea redundante.</p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-tag">&lt;button</span> <span class="token-attr">class</span><span class="token-string">="btn-fav"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content">  <span class="token-tag">&lt;svg</span> <span class="token-attr">aria-hidden</span><span class="token-string">="true"</span> ...<span class="token-tag">&gt;</span><span class="token-tag">&lt;/svg&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content">  <span class="token-tag">&lt;span</span><span class="token-tag">&gt;</span>Favoritos<span class="token-tag">&lt;/span&gt;</span></span></div><div class="line"><span class="line-num">4</span><span class="line-content"><span class="token-tag">&lt;/button&gt;</span></span></div></code></pre>
+
+      <p>También podemos utilizar la imagen del ícono directamente dentro del botón o link, donde el <span>alt</span> sirve al propósito de explicar la función del botón, sin la necesidad de uso de <span>aria</span> o <span>.sr-only</span>.</p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-tag">&lt;button</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content">  <span class="token-tag">&lt;img</span> <span class="token-attr">src</span><span class="token-string">="fav.svg"</span> <span class="token-attr">alt</span><span class="token-string">="Agregar a favoritos"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content"><span class="token-tag">&lt;/button&gt;</span></span></div></code></pre>
+
+      <h2>¿Qué es <span>.sr-only?</span></h2>
+      <p>El patrón de diseño <span>sr-only</span> es una clase que utilizamos en <span>accesibilidad</span> para ocultar un elemento de la vista base de nuestro diseño y es accesible solamente desde lectores de pantalla. De ahí su nombre en inglés <span lang="en">screen reader only</span>.</p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-selector">.sr-only</span> {</span></div><div class="line"><span class="line-num">2</span><span class="line-content">  <span class="token-tag">position</span>: <span class="token-number">absolute</span>;</span></div><div class="line"><span class="line-num">3</span><span class="line-content">  <span class="token-tag">width</span>: <span class="token-number">1px</span>;</span></div><div class="line"><span class="line-num">4</span><span class="line-content">  <span class="token-tag">height</span>: <span class="token-number">1px</span>;</span></div><div class="line"><span class="line-num">5</span><span class="line-content">  <span class="token-tag">padding</span>: <span class="token-number">0</span>;</span></div><div class="line"><span class="line-num">6</span><span class="line-content">  <span class="token-tag">margin</span>: -<span class="token-number">1px</span>;</span></div><div class="line"><span class="line-num">7</span><span class="line-content">  <span class="token-tag">overflow</span>: <span class="token-number">hidden</span>;</span></div><div class="line"><span class="line-num">8</span><span class="line-content">  <span class="token-tag">clip</span>: <span class="token-builtin">rect</span>(<span class="token-number">0</span>, <span class="token-number">0</span>, <span class="token-number">0</span>, <span class="token-number">0</span>);</span></div><div class="line"><span class="line-num">9</span><span class="line-content">  <span class="token-tag">white-space</span>: <span class="token-number">nowrap</span>;</span></div><div class="line"><span class="line-num">10</span><span class="line-content">  <span class="token-tag">border</span>: <span class="token-number">0</span>;</span></div><div class="line"><span class="line-num">11</span><span class="line-content">}</span></div></code></pre>
+
+      <p>Esta clase quita el elemento del flujo normal del HTML a través de la propiedad <span>position: absolute</span>. Lo reduce a la expresión mínima visible y oculta su contenido a través de las propiedades <span>width/heigh</span> y <span>clip</span>. También evita que el texto se expanda y sea visible con la propiedad <span>white-space: nowrap</span></p>
+      <aside class="note note--tip">
+        <p>Es importante no utilizar <span>display: none</span>, <span>visibility: hidden</span> o <span>hidden</span> porque estas propiedades ocultan el elemento del árbol de accesibilidad.</p>
+      </aside>
+    </section>
+    <section>
+      <h1><acronym lang="en" title="Web Accessibility Initiative — Accessible Rich Internet Applications">WAI-ARIA</acronym></h1>
+      <p>Las <strong>ARIA</strong> (Accesible Rich Internet Applications) son un conjunto de atributos de <strong>HTML</strong> que sirven para suplir las limitaciones de accesibilidad cuando el <strong>HTML</strong> semántico no alcanza.</p>
+      
+      <ul>
+        <li><span>aria-label="texto"</span>	Etiqueta invisible que reemplaza el texto visible.</li>
+        <li><span>aria-labelledby="id"</span>	Referencia a otro elemento que sirve como etiqueta.</li>
+        <li><span>aria-describedby="id"</span>	Referencia a otro elemento con descripción extendida.</li>
+        <li><span>aria-controls="id"</span>	Indica que este elemento controla otro.</li>
+        <li><span>aria-current="page"</span>	Elemento activo en un conjunto de navegación.</li>
+        <li><span>aria-hidden="true"</span>	Oculta un elemento del árbol de accesibilidad.</li>
+      </ul>
+
+      <h2>Estados <span>aria</span></h2>
+      <p>Podemos utilizar atributos <span>aria</span> no sólo para identificar qué tipo de elemento describimos para la <strong>API</strong> de <strong>accesibilidad</strong> sino también para describir su <strong>estado</strong>.</p>
+
+      <ul>
+        <li><span>aria-expanded="true/false"</span>	Acordeón, menú desplegable — ¿está abierto?</li>
+        <li><span>aria-pressed="true/false"</span>	Botón de tipo toggle</li>
+        <li><span>aria-selected="true/false"</span>	Pestaña activa en un tabpanel</li>
+        <li><span>aria-disabled="true"</span>	Elemento deshabilitado (semántico, no visual)</li>
+        <li><span>aria-invalid="true"</span>	Campo de formulario con error de validación</li>
+        <li><span>aria-required="true"</span>	Campo obligatorio</li>
+      </ul>
+
+      <h2>Lectura del nombre accesible</h2>
+      <p>El <span lang="en">accesible name</span> es cómo los lectores de pantalla identifican un elemento. Esta es la prioridad, de mayor a menor:</p>
+      <ul>
+        <li><span>aria-labelledby</span> (referencia a otro elemento)</li>
+        <li><span>aria-label</span> (texto directo)</li>
+        <li>Texto visible del elemento (contenido textual interno)</li>
+        <li>title (último recurso, mala accesibilidad)</li>
+      </ul>
+      <aside class="note note--tip">
+        <p><span>aria-label</span> reemplaza al texto visible. Si el <span>a</span> dice "Favoritos" y le colocamos <span>aria-label="Acceder a favoritos"</span>, el lector de pantalla lee "Acceder a favoritos", no "Favoritos". Es recomendable usarlo sólo cuando no haya texto visible o necesitemos un texto alternativo diferente.</p>
+      </aside>
+
+      <h2>Roles <span>role=""</span></h2>
+      <p>El atributo <span>role</span> define <em>qué es</em> un elemento para la <strong>API</strong> de accesibilidad. El uso de <span>role</span> quedó anticuado gracias a que es preferible utilizar <strong>html semántico</strong>.</p>
+      <ul>
+        <li><span>role="button"</span> <strong> &lt;button&gt;</strong></li>
+        <li><span>role="navigation"</span> <strong> &lt;nav&gt;</strong></li>
+        <li><span>role="banner"</span> <strong> &lt;header&gt;</strong></li>
+        <li><span>role="bontentinfo"</span> <strong> &lt;footer&gt;</strong></li>
+        <li><span>role="main"</span> <strong> &lt;main&gt;</strong></li>
+        <li><span>role="heading"</span> <strong> &lt;h1 / h6&gt;</strong></li>
+      </ul>
+      <p>Los roles ayudan a navegar la página por regiones. Los elementos <span>HTML</span> semánticos ya exponen su rol implícito, no es necesario utilizar <span>role</span>.</p>
+      <p>En el caso de que haya más de un <span>header</span> en la página, podríamos señalar el principal con el <span>role="banner"</span></p>
+      <p>Si tenemos más de un <span>nav</span>, podemos distinguir utilizando <span>aria-label</span> para mostrar su función. Por ejemplo: <span>aria-label="Menú principal"</span>, <span>aria-label="Redes sociales"</span></p>
+
+      <h2>Patrones de navegación / interacciones comunes con <span>aria</span></h2>
+      <h3>Skip link (salto de navegación)</h3>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-tag">&lt;a</span> <span class="token-attr">href</span><span class="token-string">="#main-content"</span> <span class="token-attr">class</span><span class="token-string">="sr-only"</span><span class="token-tag">&gt;</span>Saltar al contenido principal<span class="token-tag">&lt;/a&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content"><span class="token-tag">&lt;main</span> <span class="token-attr">id</span><span class="token-string">="main-content"</span><span class="token-tag">&gt;</span></span></div></code></pre>
+
+      <h3>Acordeón</h3>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-tag">&lt;button</span> <span class="token-attr">aria-expanded</span><span class="token-string">="false"</span> <span class="token-attr">aria-controls</span><span class="token-string">="panel-1"</span><span class="token-tag">&gt;</span>Pregunta 1<span class="token-tag">&lt;/button&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content"><span class="token-tag">&lt;div</span> <span class="token-attr">id</span><span class="token-string">="panel-1"</span> <span class="token-attr">role</span><span class="token-string">="region"</span> <span class="token-attr">aria-labelledby</span><span class="token-string">="..."</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content">  Respuesta 1</span></div><div class="line"><span class="line-num">4</span><span class="line-content"><span class="token-tag">&lt;/div&gt;</span></span></div></code></pre>
+
+      <h3>Pestañas / Tabs</h3>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-tag">&lt;div</span> <span class="token-attr">role</span><span class="token-string">="tablist"</span> <span class="token-attr">aria-label</span><span class="token-string">="Secciones del curso"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content">  <span class="token-tag">&lt;button</span> <span class="token-attr">role</span><span class="token-string">="tab"</span> <span class="token-attr">aria-selected</span><span class="token-string">="true"</span> <span class="token-attr">aria-controls</span><span class="token-string">="panel-1"</span> <span class="token-attr">id</span><span class="token-string">="tab-1"</span><span class="token-tag">&gt;</span>HTML<span class="token-tag">&lt;/button&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content">  <span class="token-tag">&lt;button</span> <span class="token-attr">role</span><span class="token-string">="tab"</span> <span class="token-attr">aria-selected</span><span class="token-string">="false"</span> <span class="token-attr">aria-controls</span><span class="token-string">="panel-2"</span> <span class="token-attr">id</span><span class="token-string">="tab-2"</span><span class="token-tag">&gt;</span>CSS<span class="token-tag">&lt;/button&gt;</span></span></div><div class="line"><span class="line-num">4</span><span class="line-content"><span class="token-tag">&lt;/div&gt;</span></span></div><div class="line"><span class="line-num">5</span><span class="line-content"><span class="token-tag">&lt;div</span> <span class="token-attr">role</span><span class="token-string">="tabpanel"</span> <span class="token-attr">id</span><span class="token-string">="panel-1"</span> <span class="token-attr">aria-labelledby</span><span class="token-string">="tab-1"</span><span class="token-tag">&gt;</span>...<span class="token-tag">&lt;/div&gt;</span></span></div><div class="line"><span class="line-num">6</span><span class="line-content"><span class="token-tag">&lt;div</span> <span class="token-attr">role</span><span class="token-string">="tabpanel"</span> <span class="token-attr">id</span><span class="token-string">="panel-2"</span> <span class="token-attr">aria-labelledby</span><span class="token-string">="tab-2"</span><span class="token-tag">&gt;</span>...<span class="token-tag">&lt;/div&gt;</span></span></div></code></pre>
+    </section>
+  </main>
+  <footer>
+    <div class="contenedor-footer">
+      <span>Accesibilidad | 2026</span>
+    </div>
+  </footer>
+</body>
+</html>
