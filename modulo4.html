@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script>
+  try {
+    const saved = localStorage.getItem('theme');
+    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', saved ?? preferred);
+  } catch {}
+  </script>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+	<title>Accesibilidad | Módulo 4</title>
+  <meta name="description" content="Módulo 4: Robusto.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="stylesheet" href="css/estilos.css">
+  <script src="js/menu.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">Accesibilidad</a></h1>
+    <div class="contenedor-menu">
+      <nav class="toggle-wrap">
+        <div class="toggle-label" id="mode-label">Modo oscuro</div>
+        <button class="toggle-btn" id="theme-toggle" aria-label="Cambiar tema"><span class="sr-only">Cambiar tema</span></button>
+      </nav>
+      <button class="menu-boton" aria-label="Ingresar al menu principal" aria-controls="primary-navigation" aria-expanded="false"><span class="sr-only">Menu principal</span></button>
+    </div>
+    <nav id="primary-navigation" data-visible="false" class="primary-navigation">
+      <ul id="nav-links"></ul>
+    </nav>
+  </header>
+  <main class="contenido">
+    <section>
+      <h1>Accesibilidad | Módulo 4: Robusto</h1>
+    </section>
+    <section>
+      <h1>Robusto</h1>
+      <p>El principio <strong>robusto</strong> establece que el contenido debe ser lo suficientemente robusto como para que pueda ser interpretado de forma fiable por una amplia variedad de agentes de usuario, incluidas las tecnologías de asistencia.</p>
+      <p>Este principio asegura compatibilidad, también que sea a prueba de futuros cambios en navegadores, lectores de pantalla o tecnologías de asistencia.</p>
+      <p>El enfoque principal es un correcto uso de tecnologías web, como el <strong>HTML</strong> semántico, ARIA bien implementado, código válido.</p>
+      <p>Formulario robusto:</p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-tag">&lt;form</span> <span class="token-attr">id</span><span class="token-string">="mi-formulario"</span> <span class="token-attr">novalidate</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content">    <span class="token-tag">&lt;div</span> <span class="token-attr">class</span><span class="token-string">="campo"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content">        <span class="token-tag">&lt;label</span> <span class="token-attr">for</span><span class="token-string">="email"</span><span class="token-tag">&gt;</span>Correo electrónico <span class="token-tag">&lt;span</span> <span class="token-attr">aria-hidden</span><span class="token-string">="true"</span><span class="token-tag">&gt;</span>*<span class="token-tag">&lt;/span&gt;</span><span class="token-tag">&lt;/label&gt;</span></span></div><div class="line"><span class="line-num">4</span><span class="line-content">        <span class="token-tag">&lt;input</span> </span></div><div class="line"><span class="line-num">5</span><span class="line-content">            <span class="token-attr">type</span><span class="token-string">="email"</span> </span></div><div class="line"><span class="line-num">6</span><span class="line-content">            <span class="token-attr">id</span><span class="token-string">="email"</span> </span></div><div class="line"><span class="line-num">7</span><span class="line-content">            <span class="token-attr">name</span><span class="token-string">="email"</span> </span></div><div class="line"><span class="line-num">8</span><span class="line-content">            required </span></div><div class="line"><span class="line-num">9</span><span class="line-content">            <span class="token-attr">aria-describedby</span><span class="token-string">="email-help email-error"</span></span></div><div class="line"><span class="line-num">10</span><span class="line-content">            <span class="token-attr">autocomplete</span><span class="token-string">="email"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">11</span><span class="line-content">        <span class="token-tag">&lt;span</span> <span class="token-attr">id</span><span class="token-string">="email-help"</span> <span class="token-attr">class</span><span class="token-string">="help"</span><span class="token-tag">&gt;</span>Ejemplo: usuario@dominio.com<span class="token-tag">&lt;/span&gt;</span></span></div><div class="line"><span class="line-num">12</span><span class="line-content">        <span class="token-tag">&lt;span</span> <span class="token-attr">id</span><span class="token-string">="email-error"</span> <span class="token-attr">class</span><span class="token-string">="error"</span> <span class="token-attr">role</span><span class="token-string">="alert"</span> <span class="token-attr">aria-live</span><span class="token-string">="polite"</span><span class="token-tag">&gt;</span><span class="token-tag">&lt;/span&gt;</span></span></div><div class="line"><span class="line-num">13</span><span class="line-content">    <span class="token-tag">&lt;/div&gt;</span></span></div><div class="line"><span class="line-num">14</span><span class="line-content">    </span></div><div class="line"><span class="line-num">15</span><span class="line-content">    <span class="token-tag">&lt;button</span> <span class="token-attr">type</span><span class="token-string">="submit"</span><span class="token-tag">&gt;</span>Enviar formulario<span class="token-tag">&lt;/button&gt;</span></span></div><div class="line"><span class="line-num">16</span><span class="line-content"><span class="token-tag">&lt;/form&gt;</span></span></div></code></pre>
+
+      <p>Componentes personalizados con ARIA (cuando no hay elemento nativo)</p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-comment">&lt;!-- Toggle switch personalizado --&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content"><span class="token-tag">&lt;div</span> <span class="token-attr">class</span><span class="token-string">="switch"</span> <span class="token-attr">role</span><span class="token-string">="switch"</span> </span></div><div class="line"><span class="line-num">3</span><span class="line-content">     <span class="token-attr">aria-checked</span><span class="token-string">="false"</span> </span></div><div class="line"><span class="line-num">4</span><span class="line-content">     <span class="token-attr">tabindex</span><span class="token-string">="0"</span> </span></div><div class="line"><span class="line-num">5</span><span class="line-content">     <span class="token-attr">id</span><span class="token-string">="modo-oscuro"</span></span></div><div class="line"><span class="line-num">6</span><span class="line-content">     <span class="token-attr">aria-labelledby</span><span class="token-string">="label-modo"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">7</span><span class="line-content">    <span class="token-tag">&lt;span</span> <span class="token-attr">id</span><span class="token-string">="label-modo"</span><span class="token-tag">&gt;</span>Activar modo oscuro<span class="token-tag">&lt;/span&gt;</span></span></div><div class="line"><span class="line-num">8</span><span class="line-content"><span class="token-tag">&lt;/div&gt;</span></span></div></code></pre>
+
+      <p>Mensajes de estado</p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-comment">&lt;!-- Mensaje de éxito --&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content"><span class="token-tag">&lt;div</span> <span class="token-attr">id</span><span class="token-string">="status"</span> <span class="token-attr">role</span><span class="token-string">="status"</span> <span class="token-attr">aria-live</span><span class="token-string">="polite"</span> <span class="token-attr">class</span><span class="token-string">="sr-only"</span><span class="token-tag">&gt;</span><span class="token-tag">&lt;/div&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content"> </span></div><div class="line"><span class="line-num">4</span><span class="line-content"><span class="token-comment">&lt;!-- Mensaje de error --&gt;</span></span></div><div class="line"><span class="line-num">5</span><span class="line-content"><span class="token-tag">&lt;div</span> <span class="token-attr">id</span><span class="token-string">="error"</span> <span class="token-attr">role</span><span class="token-string">="alert"</span> <span class="token-attr">aria-live</span><span class="token-string">="assertive"</span> <span class="token-attr">class</span><span class="token-string">="error"</span><span class="token-tag">&gt;</span><span class="token-tag">&lt;/div&gt;</span></span></div></code></pre>
+
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-keyword">function</span> <span class="token-function">mostrarMensaje</span>(mensaje, tipo <span class="token-operator">=</span> <span class="token-string">'status'</span>) {</span></div><div class="line"><span class="line-num">2</span><span class="line-content">    <span class="token-keyword">const</span> contenedor <span class="token-operator">=</span> document.<span class="token-function">getElementById</span>(tipo <span class="token-operator">==</span><span class="token-operator">=</span> <span class="token-string">'error'</span> <span class="token-operator">?</span> <span class="token-string">'error'</span> <span class="token-operator">:</span> <span class="token-string">'status'</span>);</span></div><div class="line"><span class="line-num">3</span><span class="line-content">    contenedor.textContent <span class="token-operator">=</span> mensaje;</span></div><div class="line"><span class="line-num">4</span><span class="line-content">    </span></div><div class="line"><span class="line-num">5</span><span class="line-content">    <span class="token-comment">// Limpiar después de un tiempo (opcional)</span></span></div><div class="line"><span class="line-num">6</span><span class="line-content">    <span class="token-keyword">if</span> (tipo <span class="token-operator">==</span><span class="token-operator">=</span> <span class="token-string">'status'</span>) {</span></div><div class="line"><span class="line-num">7</span><span class="line-content">        <span class="token-function">setTimeout</span>(() <span class="token-operator">=&gt;</span> {</span></div><div class="line"><span class="line-num">8</span><span class="line-content">            contenedor.textContent <span class="token-operator">=</span> <span class="token-string">''</span>;</span></div><div class="line"><span class="line-num">9</span><span class="line-content">        }, <span class="token-number">5000</span>);</span></div><div class="line"><span class="line-num">10</span><span class="line-content">    }</span></div><div class="line"><span class="line-num">11</span><span class="line-content">}</span></div><div class="line"><span class="line-num">12</span><span class="line-content"> </span></div><div class="line"><span class="line-num">13</span><span class="line-content"><span class="token-comment">// Uso</span></span></div><div class="line"><span class="line-num">14</span><span class="line-content"><span class="token-function">mostrarMensaje</span>(<span class="token-string">'Formulario enviado correctamente'</span>, <span class="token-string">'status'</span>);</span></div><div class="line"><span class="line-num">15</span><span class="line-content"><span class="token-function">mostrarMensaje</span>(<span class="token-string">'El correo es obligatorio'</span>, <span class="token-string">'error'</span>);</span></div></code></pre>
+
+      <p>Uso correcto de <strong>ARIA</strong></p>
+      <pre class="code-block"><code class="code-content"><div class="line"><span class="line-num">1</span><span class="line-content"><span class="token-comment">&lt;!-- Correcto --&gt;</span></span></div><div class="line"><span class="line-num">2</span><span class="line-content"><span class="token-tag">&lt;nav</span> <span class="token-attr">aria-label</span><span class="token-string">="Menú principal"</span><span class="token-tag">&gt;</span></span></div><div class="line"><span class="line-num">3</span><span class="line-content">    <span class="token-comment">&lt;!-- enlaces --&gt;</span></span></div><div class="line"><span class="line-num">4</span><span class="line-content"><span class="token-tag">&lt;/nav&gt;</span></span></div><div class="line"><span class="line-num">5</span><span class="line-content"> </span></div><div class="line"><span class="line-num">6</span><span class="line-content"><span class="token-comment">&lt;!-- Evitar redundancia --&gt;</span></span></div><div class="line"><span class="line-num">7</span><span class="line-content"><span class="token-tag">&lt;button</span> <span class="token-attr">aria-label</span><span class="token-string">="Cerrar"</span><span class="token-tag">&gt;</span>✕<span class="token-tag">&lt;/button&gt;</span>   <span class="token-comment">&lt;!-- Solo si el texto visible no es suficiente --&gt;</span></span></div></code></pre>
+
+      <h2>Checklist sobre principios operables:</h2>
+      <ul>
+        <li>Usar siempre HTML semántico</li>
+        <li>Validar el HTML (W3C Validator)</li>
+        <li>Todos los componentes interactivos tienen nombre accesible (<span>visible o aria-label</span> / <span>aria-labelledby</span>)</li>
+        <li>Roles ARIA correctos cuando se crean componentes personalizados</li>
+        <li>Estados actualizados (<span>aria-expanded</span>, <span>aria-checked</span>, <span>aria-selected</span>, etc.)</li>
+        <li>Mensajes de estado usan <span>role="status"</span> o <span>role="alert"</span> + <span>aria-live</span></li>
+        <li>Soporte para <span>prefers-reduced-motion</span>, <span>prefers-color-scheme</span>, etc.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <div class="contenedor-footer">
+      <span>Accesibilidad | 2026</span>
+    </div>
+  </footer>
+</body>
+</html>

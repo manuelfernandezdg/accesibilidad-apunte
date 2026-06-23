@@ -26,10 +26,10 @@ closeAll.addEventListener('click', () => {
 
 /* Links para el menú principal */
 const menuItems = [
-  { href: "clase1.html", texto: "Clase 1"},
-  { href: "clase2.html", texto: "Clase 2"},
-  { href: "clase3.html", texto: "Clase 3"},
-  { href: "clase4.html", texto: "Clase 4"}
+  { href: "modulo1.html", texto: "Módulo 1"},
+  { href: "modulo2.html", texto: "Módulo 2"},
+  { href: "modulo3.html", texto: "Módulo 3"},
+  { href: "modulo4.html", texto: "Módulo 4"}
 ]
 
 document.getElementById('nav-links').innerHTML = 
